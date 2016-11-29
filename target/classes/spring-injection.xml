@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="injectionService" class="com.carolearning.injection.service.InjectionServiceImpl">
+		<!-- 设值注入 -->
+		<!-- <property name="injectionDAO" ref="injectionDAO" /> -->
+		<!-- 构造注入 -->
+		<constructor-arg name="injectionDAO" ref="injectionDAO" />
+	</bean>
+	
+	<bean id="injectionDAO" class="com.carolearning.injection.dao.InjectionDAOImpl"></bean>
+
+</beans> 
