@@ -2,7 +2,9 @@ package com.carolearning.test;
 
 import org.junit.After;
 import org.junit.Before;
+import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.StringUtils;
 
 public class UnitTestBase {
 
@@ -19,9 +21,17 @@ public class UnitTestBase {
 	
 	@Before
 	public void before(){
-//		context = new FileSystemXmlApplicationContext(springXmlPath.split("[,\\s]+"));
-		context = new ClassPathXmlApplicationContext(springXmlPath.split("[,\\s]+"));
-		context.start();
+		if(StringUtils.isEmpty(springXmlPath)){
+			springXmlPath = "classpath*:spring-*.xml";
+		}
+		try{
+//			context = new FileSystemXmlApplicationContext(springXmlPath.split("[,\\s]+"));
+			context = new ClassPathXmlApplicationContext(springXmlPath.split("[,\\s]+"));
+			context.start();
+		} catch(BeansException e){
+			e.printStackTrace();
+		}
+
 	}
 	
 	@After
